@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPost } from "../actions/postActions";
+import { fetchPosts } from "../actions/postActions";
 import PropsTypes from "prop-types";
 class Posts extends Component {
   componentWillMount() {
-    this.props.fetchPost();
+    this.props.fetchPosts();
   }
 
   render() {
@@ -36,5 +36,5 @@ Posts.PropsTypes = {
 // need to connect the map , action and Component in export
 export default connect(
   mapStateToProps, // map
-  { fetchPost } // actions
+  { fetchPosts } // actions
 )(Posts); // component

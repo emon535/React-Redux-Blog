@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { createPost } from "../actions/postActions";
+import PropsTypes from "prop-types";
 
-export default class Postform extends Component {
+class Postform extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +18,12 @@ export default class Postform extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.newPost) {
+      this.props.posts.unshift(nextProps.newPost);
+    }
   }
 
   onSubmit(event) {
@@ -67,3 +76,16 @@ export default class Postform extends Component {
     );
   }
 }
+
+Postform.PropsTypes = {
+  createPost: PropsTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  posts: state.posts.items,
+  newPost: state.posts.item
+});
+export default connect(
+  null,
+  { createPost }
+)(Postform);

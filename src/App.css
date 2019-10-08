@@ -20,3 +20,10 @@
 .App-link {
   color: #09d3ac;
 }
+
+.post-item {
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid rebeccapurple;
+}

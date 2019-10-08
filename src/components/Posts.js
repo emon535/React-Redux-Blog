@@ -1,32 +1,14 @@
 import React, { Component } from "react";
-
-export default class Posts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: []
-    };
-  }
+import { connect } from "react-redux";
+import { fetchPost } from "../actions/postActions";
+import PropsTypes from "prop-types";
+class Posts extends Component {
   componentWillMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          posts: data
-        });
-      });
+    this.props.fetchPost();
   }
 
   render() {
-    // const postItems = this.state.posts.map(post => {
-    //   <div key={post.id}>
-    //     <h4>{post.title}</h4>
-    //     <p>{post.body}</p>
-    //   </div>;
-    // });
-
-    const postItems = this.state.posts.map(post => (
+    const postItems = this.props.posts.map(post => (
       <div className="post-item" key={post.id}>
         <h4>{post.title}</h4>
         <p>{post.body}</p>
@@ -40,3 +22,19 @@ export default class Posts extends Component {
     );
   }
 }
+
+// this is where I get the posts in this component  from the root store / state
+const mapStateToProps = state => ({
+  posts: state.posts.items
+});
+
+Posts.PropsTypes = {
+  fetchPost: PropsTypes.func.isRequired,
+  posts: PropsTypes.array.isRequired
+};
+
+// need to connect the map , action and Component in export
+export default connect(
+  mapStateToProps, // map
+  { fetchPost } // actions
+)(Posts); // component

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions/postActions";
-import PropsTypes from "prop-types";
+import PropTypes from "prop-types";
 class Posts extends Component {
   componentWillMount() {
     this.props.fetchPosts();
@@ -28,9 +28,9 @@ const mapStateToProps = state => ({
   posts: state.posts.items
 });
 
-Posts.PropsTypes = {
-  fetchPost: PropsTypes.func.isRequired,
-  posts: PropsTypes.array.isRequired
+Posts.propTypes = {
+  fetchPost: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired
 };
 
 // need to connect the map , action and Component in export

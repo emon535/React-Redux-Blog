@@ -3,7 +3,7 @@ import { FETCH_POST, NEW_POST } from "./types";
 // create the methods in actions:
 
 export const fetchPosts = dispatch => {
-  fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
+  return fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
     response.json().then(posts =>
       dispatch({
         type: FETCH_POST,
@@ -12,6 +12,7 @@ export const fetchPosts = dispatch => {
     )
   );
 };
+
 
 export const createPost = post => dispatch => {
   fetch("https://jsonplaceholder.typicode.com/posts", {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { thisExpression } from '@babel/types';
+import Auth from '../utils/auth';
 
 class Container extends React.Component {
 
@@ -36,6 +37,7 @@ class Container extends React.Component {
     render() {
         return (
             <div>
+                <button onClick={() => console.log(this.props.stateprops1)}></button>
                 <h3>{this.state.name}</h3>
                 <form onSubmit={this.handleClick}>
                     <label> Name</label>

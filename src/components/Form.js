@@ -5,6 +5,7 @@ import { addArticle } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
+    // This is how I linked addArticle method with the action and props. I can access the addArticle from props.addArticle after this.
     addArticle: article => dispatch(addArticle(article))
   };
 }

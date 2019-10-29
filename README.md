@@ -1,74 +1,125 @@
-# React-Redux-Blog
+# React-Redux- Real World Example
 
 > React-redux app using the basic redux features to create a blog post app using Json Placeholder public api and create blog posts.
 
-## Instructions
+### How I learned React Redux
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### :rocket: Comparing React Redux main terminology with real world things
 
-## Available Scripts
+:dert: **Store**:
 
-In the project directory, you can run:
+Lets think store as a Real Store. Where I have many data and information. 
 
-### `npm start`
+:dert: **Reducer**:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Reducer is a person works at my store. I can assign him in many task ( *Actions* ) and make him to re organaise my store ( *read state* ). 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+For example if I ask him to ***sort the soap section*** and give him the soap name ***Lux Soap*** he will sort the soap section.
 
-### `npm test`
+Reducer accepts two parameter
+    - ACTION
+    - STATE
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Like the Store boy, he will need 2 things to do the work.
 
-### `npm run build`
+If we code the state we can see
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    const initialState = {
+    articles: []
+    };
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    function rootReducer(state = initialState, action) {
+    return state;
+    };
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    export default rootReducer;
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+:dert: **Actions**: 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Here the **Actions** is the "type" and "payload" object like this:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+        {
+            type: 'SORT_THE_SHOP_SECTION', // Which work - Sort the soap
+            payload: { brand: 'Lux', id: 1 } // Which brand
+        }
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Here we can use **Constant** for the type value instade of String. Think of this as a shortcut which you use for the store boy to do any task and he understands the full task.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    export const SORT_SOAP = "SORT_THE_SOAP_SECTION";
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Now the code will look like : 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+        
+    import { SORT_SOAP } from "../constants/action-types";
+    export function addArticle(payload) {
+    return { type: SORT_SOAP, payload };
+    }
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### How do you tell the boy to do the task ? 
 
-### Making a Progressive Web App
+Before telling this ( how he knows the task ) first set some rule for the store management: 
+- The boy can't damage the items in the store ( Can't mutate the store data [Redux principle: immutability.] )
+- Can't open the box of the items in the store and change internal items to sort (we can't change the initial state in place.)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+> This example may not make sense, but keep in mind : 
+> - We can't change the state in place 
+> - We can't use impure function for reducer
+> -  Remember two key points for avoiding mutations in Redux:
+>    - use concat(), slice(), or the spread operator for arrays
+>    - use Object.assign() or object spread of objects
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+***So, how the boy knows what to do: [ Action for Reducer ]***
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+There is a board in the store where all the instructions are placed. The boy checks for a task and related information for the task.
 
-### `npm run build` fails to minify
+if we think in code, the reducer checks what is the task from actions [ type of work , payload ] and act accordingly. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    initialState = {
+        soap_brand:[
+            // unsorted soap 
+        ]
+    }
+
+    function rootReducer(state = initialState, action)  {
+        if (action.type === SORT_SHOP) {
+        return {
+            soap_brand:[
+                    // Sorted soap 
+                ]
+            } 
+        });
+        }
+    
+        return state;
+
+    }
+
+
+### :dert:  **Redux store methods**:
+
+- getState - We can know the current **state of the state** of the application/ store
+- dispatch - to let reducer know what action is to complete (Posting the task in the task-board )
+- subscribe - for listening on state changes . ***Not clear? I will discuss this later*** 
+  
+
+### :dert: **Where is React with Redux?**
+
+How I connect react with redux? 
+
+Yes You have given the answer, with ***connect*** we connect the react with redux. We get ***connect***  from *react-redux* library.
+
+#### what is the "connect":
+
+connect is used to connect the react states and actions with redux state and actions with the two following functions;
+- mapStateToProps
+- mapDispatchToProps
+
+
+> Always remember: the state in redux comes from reducers.
+

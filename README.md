@@ -6,11 +6,11 @@
 
 #### :rocket: Comparing React Redux main terminology with real world things
 
-:dert: **Store**:
+:dart: **Store**:
 
 Lets think store as a Real Store. Where I have many data and information. 
 
-:dert: **Reducer**:
+:dart: **Reducer**:
 
 Reducer is a person works at my store. I can assign him in many task ( *Actions* ) and make him to re organaise my store ( *read state* ). 
 
@@ -35,7 +35,7 @@ If we code the state we can see
     export default rootReducer;
 
 
-:dert: **Actions**: 
+:dart: **Actions**: 
 
 Here the **Actions** is the "type" and "payload" object like this:
 
@@ -101,14 +101,14 @@ if we think in code, the reducer checks what is the task from actions [ type of 
     }
 
 
-### :dert:  **Redux store methods**:
+### :dart:  **Redux store methods**:
 
 - getState - We can know the current **state of the state** of the application/ store
 - dispatch - to let reducer know what action is to complete (Posting the task in the task-board )
 - subscribe - for listening on state changes . ***Not clear? I will discuss this later*** 
   
 
-### :dert: **Where is React with Redux?**
+### :dart: **Where is React with Redux?**
 
 How I connect react with redux? 
 

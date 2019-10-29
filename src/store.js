@@ -21,15 +21,11 @@
 
 // export default store;
 
+
 import { createStore } from "redux";
-import rotateReducer from "./reducers/rotateReducer";
+import rootReducer from "./reducers";
 
-const initialState = {
-  rotating: true
-}
 
-function configureStore(state = initialState) {
-  return createStore(rotateReducer, state);
-}
+const store = createStore(rootReducer);
 
-export default configureStore;
+export default store;

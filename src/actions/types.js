@@ -1,2 +1,2 @@
-export const FETCH_POST = "FETCH_POST";
+export const ADD_ARTICLE = "ADD_ARTICLE";
 export const NEW_POST = "NEW_POST";

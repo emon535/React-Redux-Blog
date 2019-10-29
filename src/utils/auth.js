@@ -10,7 +10,7 @@ export default class Auth {
 
     })
 
-    const login = () => {
+    login = () => {
         this.auth0.authorize();
     }
 }
